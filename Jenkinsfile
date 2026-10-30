@@ -23,16 +23,17 @@ stage('package') {
                 sh 'mvn clean deploy'
             }
         }
+         stage('remove existing Docker container') {
+    steps {
+        sh 'docker rm -f $(docker ps -aq)'
+    }
+         }
         stage('remove existing Docker Image') {
     steps {
         sh 'docker rmi -f $(docker images -q)'
     }
         }
-            stage('remove existing Docker container') {
-    steps {
-        sh 'docker rm -f $(docker ps -aq)'
-    }
-            }
+            
         stage('Build Docker Image') {
     steps {
         sh 'docker build -t quickbite-app:1.0 -f Dockerfile .'
