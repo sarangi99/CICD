@@ -23,5 +23,10 @@ stage('package') {
                 sh 'mvn clean deploy'
             }
         }
+        stage('Build Docker Image') {
+    steps {
+        sh 'docker build -t quickbite-app:1.0 .'
+    }
+}
     }
 }
