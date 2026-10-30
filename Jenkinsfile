@@ -10,11 +10,11 @@ pipeline {
         }
 stage('Build') {
             steps {
-                sh mvn clean compile 
+                sh 'mvn clean compile' 
            }
         }
 stage('package') {
             steps {
-                sh mvn package
+                sh 'mvn package'
             }
         }
