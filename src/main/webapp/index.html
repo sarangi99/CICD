@@ -1,49 +1,542 @@
-<!doctype html>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SkyTrail — Explore More</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUPER MARIO | Gaming World</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #080d20;
+    color: white;
+    overflow-x: hidden;
+}
+
+:root {
+    --red: #ff3c46;
+    --yellow: #ffcf40;
+    --blue: #00c8ff;
+    --dark: #080d20;
+}
+
+nav {
+    height: 85px;
+    padding: 0 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(8,13,32,0.9);
+    border-bottom: 1px solid #ffffff15;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 25px;
+    font-weight: 900;
+    color: var(--yellow);
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: var(--red);
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #c4c9dc;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: var(--yellow);
+}
+
+.nav-btn {
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.nav-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px #ff3c4680;
+}
+
+.hero {
+    min-height: 100vh;
+    padding: 150px 8% 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    background:
+      radial-gradient(ellipse at 75% 45%, #163f7d 0%, transparent 45%),
+      linear-gradient(135deg, #080d20, #101b3a);
+}
+
+.hero-content {
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
+}
+
+.tag {
+    color: var(--yellow);
+    font-size: 12px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(45px, 7vw, 85px);
+    font-weight: 900;
+    line-height: 1.12;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: var(--red);
+    text-shadow: 0 0 30px #ff3c4670;
+}
+
+.hero p {
+    color: #aab4d0;
+    font-size: 15px;
+    line-height: 2;
+    max-width: 480px;
+    margin-bottom: 35px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.primary-btn, .secondary-btn {
+    padding: 16px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.primary-btn {
+    background: var(--red);
+    color: white;
+    border: 1px solid var(--red);
+    box-shadow: 0 10px 30px #ff3c4640;
+}
+
+.secondary-btn {
+    border: 1px solid #ffffff40;
+    color: white;
+    background: #ffffff08;
+}
+
+.primary-btn:hover, .secondary-btn:hover {
+    transform: translateY(-5px);
+}
+
+.hero-art {
+    width: 45%;
+    min-height: 390px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.mario {
+    font-size: clamp(130px, 22vw, 270px);
+    filter: drop-shadow(0 20px 30px #0008);
+    animation: bounce 3s ease-in-out infinite;
+    z-index: 2;
+}
+
+.coin {
+    position: absolute;
+    font-size: 45px;
+    animation: float 3s ease-in-out infinite;
+}
+
+.coin.one { top: 5%; left: 10%; }
+.coin.two { top: 20%; right: 5%; animation-delay: 1s; }
+.coin.three { bottom: 10%; left: 15%; animation-delay: 2s; }
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-25px) rotate(5deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-25px); }
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 35px 8%;
+    background: #111a34;
+    border-top: 1px solid #ffffff15;
+    border-bottom: 1px solid #ffffff15;
+    text-align: center;
+}
+
+.stat h2 {
+    color: var(--yellow);
+    font-family: 'Orbitron';
+    font-size: 30px;
+}
+
+.stat p {
+    color: #8d9ab8;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.section {
+    padding: 100px 8%;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-heading h2 {
+    font-family: 'Orbitron';
+    font-size: clamp(25px, 4vw, 40px);
+    margin-bottom: 15px;
+}
+
+.section-heading h2 span {
+    color: var(--yellow);
+}
+
+.section-heading p {
+    color: #8997b8;
+    font-size: 14px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    padding: 35px 25px;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #192648, #10182d);
+    border: 1px solid #ffffff15;
+    text-align: center;
+    transition: .4s;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-12px);
+    border-color: var(--yellow);
+    box-shadow: 0 20px 45px #0005;
+}
+
+.card-icon {
+    font-size: 65px;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    font-family: 'Orbitron';
+    font-size: 17px;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #9aa7c4;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.card button {
+    margin-top: 25px;
+    padding: 11px 25px;
+    border: none;
+    background: var(--yellow);
+    color: #111;
+    border-radius: 6px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.banner {
+    margin: 0 8% 100px;
+    padding: 65px 30px;
+    text-align: center;
+    border-radius: 20px;
+    background: linear-gradient(120deg, #e72f46, #8e174b, #32257d);
+    position: relative;
+    overflow: hidden;
+}
+
+.banner h2 {
+    font-family: 'Orbitron';
+    font-size: clamp(25px, 4vw, 40px);
+    margin-bottom: 15px;
+}
+
+.banner p {
+    color: #ffe0e8;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.banner button {
+    padding: 15px 30px;
+    border-radius: 8px;
+    border: none;
+    background: white;
+    color: #d72843;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+footer {
+    padding: 35px 8%;
+    background: #060a17;
+    border-top: 1px solid #ffffff15;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    color: #7885a4;
+    font-size: 12px;
+}
+
+footer span {
+    color: var(--yellow);
+}
+
+@media(max-width: 850px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 150px;
+    }
+
+    .hero-content { margin: auto; }
+    .hero p { margin-left: auto; margin-right: auto; }
+    .hero-buttons { justify-content: center; }
+    .hero-art { width: 100%; min-height: 300px; }
+    .cards { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+}
+
+@media(max-width: 550px) {
+    .cards { grid-template-columns: 1fr; }
+    .stats { padding: 30px 4%; }
+    .stat h2 { font-size: 21px; }
+    .stat p { font-size: 10px; }
+    nav { padding: 0 5%; }
+    .logo { font-size: 20px; }
+    .nav-btn { padding: 10px 14px; }
+    .section { padding: 75px 6%; }
+}
+</style>
 </head>
+
 <body>
-  <header class="site-header">
-    <a class="brand" href="index.html"><span class="brand-mark">S</span> SkyTrail</a>
-    <nav><a href="#destinations">Destinations</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
-  </header>
-  <main>
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</div>
-        <h1>Find me <br><span>somewhere.</span></h1>
-        <p>Small escapes, big adventures. Discover inspiring places and make room for stories worth telling.</p>
-        <a class="button" href="#destinations">Explore destinations <span aria-hidden="true">↗</span></a>
-        <div class="hero-stats"><div><strong>40+</strong><small>Curated places</small></div><div><strong>12k</strong><small>Happy explorers</small></div><div><strong>4.9/5</strong><small>Traveler rating</small></div></div>
-      </div>
-      <div class="hero-art" role="img" aria-label="Stylized mountains, sun, and lake landscape">
-        <div class="sun"></div><div class="mountain mountain-back"></div><div class="mountain mountain-front"></div>
-        <div class="lake"></div><div class="art-label">THE WORLD IS WIDE <span>✳</span></div>
-      </div>
-    </section>
-    <section class="section" id="destinations">
-      <div class="section-heading"><div><div class="eyebrow">PICK YOUR PACE</div><h2>Made for getting away.</h2></div><p>Three kinds of trips.<br>Infinite ways to feel alive.</p></div>
-      <div class="cards">
-        <article class="destination card-mountains"><div class="card-icon">⌁</div><div><span class="tag">NATURE</span><h3>Mountain<br>hideaways</h3><p>Fresh air, quiet trails, and sunrise views.</p></div><span class="card-arrow">↗</span></article>
-        <article class="destination card-coast"><div class="card-icon">≈</div><div><span class="tag">SLOW LIVING</span><h3>Coastal<br>weekends</h3><p>Salt in your hair and nowhere to be.</p></div><span class="card-arrow">↗</span></article>
-        <article class="destination card-city"><div class="card-icon">✳</div><div><span class="tag">CULTURE</span><h3>City<br>discoveries</h3><p>Hidden cafes, local markets, new sounds.</p></div><span class="card-arrow">↗</span></article>
-      </div>
-    </section>
-    <section class="about" id="about"><div class="about-mark">S.</div><div><div class="eyebrow">TRAVEL A LITTLE DIFFERENT</div><h2>Less planning.<br>More feeling.</h2><p>SkyTrail is a sample travel website built for Java, Maven, and Tomcat practice. Explore the page, submit the demo contact form, and deploy the generated WAR from Jenkins.</p></div></section>
-    <section class="section contact-section" id="contact">
-      <div class="section-heading"><div><div class="eyebrow">SAY HELLO</div><h2>Let's plan a story.</h2></div><p>This form submits to a Java Servlet.<br>No database is required.</p></div>
-      <form class="contact-form" action="contact" method="post">
-        <label>Your name<input name="name" required maxlength="80" placeholder="Alex Explorer"></label>
-        <label>Email address<input name="email" type="email" required maxlength="120" placeholder="alex@example.com"></label>
-        <label class="full">What kind of trip are you dreaming of?<textarea name="message" required maxlength="1000" rows="4" placeholder="Tell us a little about it..."></textarea></label>
-        <button class="button" type="submit">Send message <span aria-hidden="true">↗</span></button>
-      </form>
-    </section>
-  </main>
-  <footer><a class="brand" href="index.html"><span class="brand-mark">S</span> SkyTrail</a><span>Demo project · Java Servlet + Maven WAR</span><a href="#top">Back to top ↑</a></footer>
+
+<nav>
+    <div class="logo">SUPER<span>MARIO.</span></div>
+
+    <ul class="nav-links">
+        <li><a href="#home">HOME</a></li>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#games">GAME MODES</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+    </ul>
+
+    <button class="nav-btn" onclick="playGame()">PLAY NOW ↗</button>
+</nav>
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+        <div class="tag">★ WELCOME TO THE MUSHROOM KINGDOM</div>
+
+        <h1>
+            LET'S GO<br>
+            <span>MARIO!</span>
+        </h1>
+
+        <p>
+            Jump into an incredible adventure! Explore magical
+            worlds, collect golden coins, defeat enemies and
+            become the ultimate champion of the Mushroom Kingdom.
+        </p>
+
+        <div class="hero-buttons">
+            <button class="primary-btn" onclick="playGame()">
+                ▶ START ADVENTURE
+            </button>
+
+            <a href="#games" class="secondary-btn">
+                EXPLORE WORLDS →
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-art">
+        <div class="coin one">🪙</div>
+        <div class="coin two">⭐</div>
+        <div class="coin three">🪙</div>
+        <div class="mario">🍄</div>
+    </div>
+
+</section>
+
+<div class="stats">
+    <div class="stat">
+        <h2>100+</h2>
+        <p>EXCITING LEVELS</p>
+    </div>
+
+    <div class="stat">
+        <h2>50M+</h2>
+        <p>ADVENTURE LOVERS</p>
+    </div>
+
+    <div class="stat">
+        <h2>999+</h2>
+        <p>GOLDEN COINS</p>
+    </div>
+</div>
+
+<section class="section" id="about">
+
+    <div class="section-heading">
+        <h2>ENTER THE <span>ADVENTURE</span></h2>
+        <p>A magical world filled with challenges, fun and surprises.</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">🍄</div>
+            <h3>POWER UP</h3>
+            <p>Discover magical mushrooms and unlock amazing powers on your journey.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">⭐</div>
+            <h3>COLLECT STARS</h3>
+            <p>Find hidden stars, collect rewards and become a legendary champion.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🏰</div>
+            <h3>EXPLORE WORLDS</h3>
+            <p>Travel through beautiful kingdoms and discover mysterious castles.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="section" id="games">
+
+    <div class="section-heading">
+        <h2>CHOOSE YOUR <span>WORLD</span></h2>
+        <p>Your next legendary adventure starts here.</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon">🌳</div>
+            <h3>GREEN KINGDOM</h3>
+            <p>Explore beautiful green landscapes and mysterious forests.</p>
+            <button onclick="selectWorld('Green Kingdom')">EXPLORE →</button>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🌋</div>
+            <h3>LAVA WORLD</h3>
+            <p>Face dangerous obstacles and survive the ultimate challenge.</p>
+            <button onclick="selectWorld('Lava World')">EXPLORE →</button>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">❄️</div>
+            <h3>ICE KINGDOM</h3>
+            <p>Discover frozen lands and overcome icy adventures.</p>
+            <button onclick="selectWorld('Ice Kingdom')">EXPLORE →</button>
+        </div>
+
+    </div>
+
+</section>
+
+<div class="banner" id="contact">
+    <h2>READY FOR THE NEXT LEVEL?</h2>
+    <p>The Mushroom Kingdom is waiting for you. Your adventure starts now!</p>
+    <button onclick="playGame()">LET'S PLAY NOW 🚀</button>
+</div>
+
+<footer>
+    <div>© 2026 <span>SUPER MARIO WORLD</span></div>
+    <div>BUILT FOR GAMERS ❤️ | GAME ON!</div>
+</footer>
+
+<script>
+function playGame() {
+    alert("🍄 Welcome to the Mushroom Kingdom! Your adventure begins!");
+}
+
+function selectWorld(world) {
+    alert("🌟 You selected " + world + "! Get ready for adventure!");
+}
+</script>
+
 </body>
 </html>
