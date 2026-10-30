@@ -25,7 +25,7 @@ stage('package') {
         }
         stage('Build Docker Image') {
     steps {
-        sh 'docker build -t quickbite-app:1.0 .'
+        sh 'docker build -t quickbite-app:1.0 -f Dockerfile .'
     }
 }
          stage('Conatiner creation using port mapping') {
