@@ -18,5 +18,10 @@ stage('package') {
                 sh 'mvn package'
             }
         }
+        stage('copy to nexus') {
+            steps {
+                sh 'mvn clean deploy'
+            }
+        }
     }
 }
