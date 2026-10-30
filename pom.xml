@@ -8,6 +8,19 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>Java WAR Website</name>
+         
+         <distributionManagement>
+    <snapshotRepository>
+        <id>nexus-snapshots</id>
+        <url>http://3.109.153.141:8081/repository/maven-snapshots/</url>
+    </snapshotRepository>
+
+    <repository>
+        <id>nexus-releases</id>
+        <url>http://3.109.153.141:8081/repository/maven-releases/</url>
+    </repository>
+</distributionManagement>
+         
   <properties>
     <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
