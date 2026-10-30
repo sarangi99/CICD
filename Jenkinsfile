@@ -15,6 +15,6 @@ stage('Build') {
         }
 stage('package') {
             steps {
-                sh mvn clean package
+                sh mvn package
             }
         }
