@@ -30,7 +30,7 @@ stage('package') {
 }
          stage('Conatiner creation using port mapping') {
     steps {
-        sh 'docker run -d --name cn-quickbite-app:1.0 -p 8083:8080  quickbite-app:1.0 '
+        sh 'docker run -d --name cn-quickbite-app -p 8083:8080  quickbite-app:1.0 '
     }
 }
     }
