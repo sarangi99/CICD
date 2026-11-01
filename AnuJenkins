@@ -4,14 +4,14 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/sarangi99/CICD.git'
+               git branch: 'main', url: 'https://github.com/sarangi99/CICD.git'
 
             }
         }
 
         stage('Compile') {
             steps {
-                sh 'mvn compile'
+                sh 'mvn clean compile'
             }
         }
        
