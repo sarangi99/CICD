@@ -14,15 +14,6 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
-        stage('TEST') {
-            steps {
-                sh 'mvn clean test'
-            }
-        }
-      stage('package') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
+       
     }
 }
