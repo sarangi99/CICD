@@ -24,6 +24,10 @@ pipeline {
                 sh 'mvn package'
             }
         }
-       
+        stage('Deploy') {
+            steps {
+                sh 'cp /var/lib/jenkins/workspace/pipeline01/target/java-war-website.war /home/ubuntu/tomcat/webapps/java-war-website.war'
+            }
+        }
     }
 }
