@@ -29,5 +29,6 @@ pipeline {
         sh 'cp /var/lib/jenkins/workspace/pipeline01/target/java-war-website.war /home/ec2-user/tomcat/webapps'
             }
         }
+      
     }
 }
